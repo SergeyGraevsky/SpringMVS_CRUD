@@ -6,7 +6,13 @@
     <title>New user</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/users}" th:object="${user}">
+<div th:align="right">
+    Your login is: <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b>
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+<form th:method="POST" th:action="@{/new}" th:object="${user}">
     <label for="name">Enter name :</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
@@ -17,6 +23,26 @@
     <br/>
     <label for="yearOfBirth">Enter year of birth :</label>
     <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth"/>
+    <br/>
+    <br/>
+    <label for="username">Enter username :</label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <br/>
+    <br/>
+    <label for="password">Enter password :</label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/>
+    <br/>
+    <p>
+        <label>Roles:
+            <input type="checkbox" name="roles"
+                   th:each="role : ${roles}"
+                   th:text="${role.role}"
+                   th:value="${role.id}"
+                   th:field="*{roles}"
+            />
+        </label>
+    </p>
     <br/>
     <br/>
     <input type="submit" value="Create!"/>

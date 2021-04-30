@@ -1,12 +1,8 @@
 package spring_mvc_crud.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import spring_mvc_crud.models.Role;
 import spring_mvc_crud.models.User;
 
 import javax.persistence.*;
@@ -48,4 +44,22 @@ public class UserDaoImpl implements UserDao {
         entityManager.merge(user);
     }
 
+    @Override
+    public User getUserByName(String userName) {
+        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.username =: name", User.class);
+        query.setParameter("name", userName);
+        return query.getResultList().stream().findAny().orElse(null);
+    }
+
+   /* @Override
+    public List<Role> getRoles() {
+        return entityManager.createQuery("select r from Role r ", Role.class).getResultList();
+    }*/
+
+
+
+    /*@Override
+    public List<Role> getRoles() {
+        return entityManager.createQuery("select r from Role r ", Role.class).getResultList();
+    }*/
 }
