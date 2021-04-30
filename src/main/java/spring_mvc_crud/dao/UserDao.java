@@ -1,6 +1,5 @@
 package spring_mvc_crud.dao;
 
-import spring_mvc_crud.models.Role;
 import spring_mvc_crud.models.User;
 
 import java.util.List;

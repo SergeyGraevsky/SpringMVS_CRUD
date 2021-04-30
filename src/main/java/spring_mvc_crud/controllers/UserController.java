@@ -15,14 +15,16 @@ import spring_mvc_crud.service.UserServiceImpl;
 public class UserController {
 
     private UserServiceImpl userService;
+
     @Autowired
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
+
     @GetMapping("/hello")
-    public String userInfo(Model model){
+    public String userInfo(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("user",userService.getUserByName(authentication.getName()));
+        model.addAttribute("user", userService.getUserByName(authentication.getName()));
         return "hello";
     }
 }

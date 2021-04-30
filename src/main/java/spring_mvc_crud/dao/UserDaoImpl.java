@@ -2,7 +2,6 @@ package spring_mvc_crud.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import spring_mvc_crud.models.Role;
 import spring_mvc_crud.models.User;
 
 import javax.persistence.*;
@@ -51,15 +50,4 @@ public class UserDaoImpl implements UserDao {
         return query.getResultList().stream().findAny().orElse(null);
     }
 
-   /* @Override
-    public List<Role> getRoles() {
-        return entityManager.createQuery("select r from Role r ", Role.class).getResultList();
-    }*/
-
-
-
-    /*@Override
-    public List<Role> getRoles() {
-        return entityManager.createQuery("select r from Role r ", Role.class).getResultList();
-    }*/
 }

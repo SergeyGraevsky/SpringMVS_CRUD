@@ -29,7 +29,6 @@
             <td>
         <span th:each="prod : ${roles}">
             <p th:text="${prod.getRole()}"></p>
-            <!--  <td sec:authentication='principal.authorities'></td>-->
         </span>
             </td>
         </tr>
@@ -39,4 +38,3 @@
 </body>
 </html>
 
-<!--xmlns:sec="http://www.thymeleaf.org/extras/spring-security"-->

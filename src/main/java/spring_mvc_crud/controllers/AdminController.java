@@ -42,11 +42,8 @@ public class AdminController {
         User user = new User();
         ModelAndView mav = new ModelAndView("new");
         mav.addObject("user", user);
-
         List<Role> roles = (List<Role>) roleService.getRoles();
-
         mav.addObject("roles", roles);
-
         return mav;
     }
 
@@ -71,8 +68,7 @@ public class AdminController {
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         List<Role> roles = (List<Role>) roleService.getRoles();
-
-        model.addAttribute("roles",roles);
+        model.addAttribute("roles", roles);
         return "edit";
     }
 
@@ -84,7 +80,6 @@ public class AdminController {
                          @RequestParam String password,
                          @RequestParam String username,
                          @RequestParam ArrayList<String> roles) {
-
         ArrayList<String> stringRoleList = roles;
         Set<Role> roleSet = new HashSet<>();
         for (String roleId : stringRoleList) {

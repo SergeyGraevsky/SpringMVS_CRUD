@@ -1,16 +1,11 @@
 package spring_mvc_crud.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring_mvc_crud.dao.UserDaoImpl;
-import spring_mvc_crud.models.Role;
 import spring_mvc_crud.models.User;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service

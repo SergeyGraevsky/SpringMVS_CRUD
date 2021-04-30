@@ -11,13 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
-//отвечает за определение места назначения, в которое направляется пользователь после выхода из системы.
-// LoginSuccessHandler - хэндлер, содержащий в себе алгоритм действий при успешной аутентификации.
-// Например, тут мы можем отправить пользователя с ролью админа на админку после логина,
-// а с ролью юзер на главную страницу сайта и т.п.
-// Spring Security использует объект Authentication, пользователя авторизованной сессии.
-
-
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 

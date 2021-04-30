@@ -3,7 +3,6 @@ package spring_mvc_crud.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring_mvc_crud.dao.RoleDaoImpl;
-import spring_mvc_crud.dao.UserDaoImpl;
 import spring_mvc_crud.models.Role;
 
 import java.util.List;
