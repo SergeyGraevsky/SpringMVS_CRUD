@@ -18,4 +18,7 @@ public interface UserDao {
 
     User getUserByName(String userName);
 
+    User getUserByPassword(String password);
+
+
 }

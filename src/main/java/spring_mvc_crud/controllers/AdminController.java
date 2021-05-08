@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import spring_mvc_crud.models.Role;
 import spring_mvc_crud.models.User;
 import spring_mvc_crud.service.RoleServiceImpl;
@@ -38,28 +37,18 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public ModelAndView newUser() {
-        User user = new User();
-        ModelAndView mav = new ModelAndView("new");
-        mav.addObject("user", user);
-        List<Role> roles = (List<Role>) roleService.getRoles();
-        mav.addObject("roles", roles);
-        return mav;
+    public String newUser(@ModelAttribute("user") User user) {
+        return "new";
     }
 
     @PostMapping("/new")
-    public String create(@RequestParam String name,
-                         @RequestParam String surname,
-                         @RequestParam Integer yearOfBirth,
-                         @RequestParam String password,
-                         @RequestParam String username,
-                         @RequestParam ArrayList<String> roles) {
-        ArrayList<String> stringRoleList = roles;
+    public String create(@ModelAttribute("user") User user, @RequestParam("role") ArrayList<String> role) {
+        if (userService.getUserByPassword(user.getPassword()) != null) return "userExists";
         Set<Role> roleSet = new HashSet<>();
-        for (String roleId : stringRoleList) {
+        for (String roleId : role) {
             roleSet.add(roleService.getRoleById(Long.valueOf(roleId)));
         }
-        User user = new User(name, surname, yearOfBirth, password, username, roleSet);
+        user.setRoles(roleSet);
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -67,25 +56,17 @@ public class AdminController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        List<Role> roles = (List<Role>) roleService.getRoles();
-        model.addAttribute("roles", roles);
         return "edit";
     }
 
     @PatchMapping("/user/{id}")
-    public String update(@PathVariable("id") int id,
-                         @RequestParam String name,
-                         @RequestParam String surname,
-                         @RequestParam Integer yearOfBirth,
-                         @RequestParam String password,
-                         @RequestParam String username,
-                         @RequestParam ArrayList<String> roles) {
-        ArrayList<String> stringRoleList = roles;
+    public String update(@ModelAttribute("user") User user,
+                         @RequestParam ArrayList<String> role) {
         Set<Role> roleSet = new HashSet<>();
-        for (String roleId : stringRoleList) {
+        for (String roleId : role) {
             roleSet.add(roleService.getRoleById(Long.valueOf(roleId)));
         }
-        User user = new User(id, name, surname, yearOfBirth, password, username, roleSet);
+        user.setRoles(roleSet);
         userService.updateUser(user);
         return "redirect:/admin";
     }
@@ -96,3 +77,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 }
+
+
+

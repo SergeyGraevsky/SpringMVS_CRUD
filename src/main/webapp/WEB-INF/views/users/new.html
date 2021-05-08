@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--<html  xmlns:th="http://www.thymeleaf.org">-->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -33,19 +32,14 @@
     <input type="text" th:field="*{password}" id="password"/>
     <br/>
     <br/>
-    <p>
-        <label>Roles:
-            <input type="checkbox" name="roles"
-                   th:each="role : ${roles}"
-                   th:text="${role.role}"
-                   th:value="${role.id}"
-                   th:field="*{roles}"
-            />
-        </label>
-    </p>
+    <select multiple size="2" name="role" required class="form-control form-control-sm">
+        <option value="1">ROLE_ADMIN</option>
+        <option selected="selected" value="2">ROLE_USER</option>
+    </select>
     <br/>
     <br/>
     <input type="submit" value="Create!"/>
 </form>
+
 </body>
 </html>

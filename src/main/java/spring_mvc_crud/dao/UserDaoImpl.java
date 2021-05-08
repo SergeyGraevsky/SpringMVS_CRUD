@@ -50,4 +50,10 @@ public class UserDaoImpl implements UserDao {
         return query.getResultList().stream().findAny().orElse(null);
     }
 
+    @Override
+    public User getUserByPassword(String password) {
+        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.password =: password", User.class);
+        query.setParameter("password", password);
+        return query.getResultList().stream().findAny().orElse(null);
+    }
 }

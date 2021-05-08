@@ -18,4 +18,5 @@ public interface UserService {
 
     User getUserByName(String userName);
 
+    User getUserByPassword(String password);
 }

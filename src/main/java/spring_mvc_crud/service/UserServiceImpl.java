@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
         userDao.addUser(user);
     }
 
-
     @Override
     @Transactional
     public void deleteUser(int id) {
@@ -45,11 +44,20 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(User user) {
+        if (user.getPassword().isEmpty()) {
+            User user1 = userDao.getUser(user.getId());
+            user.setPassword(user1.getPassword());
+        }
         userDao.updateUser(user);
     }
 
     @Override
     public User getUserByName(String userName) {
         return userDao.getUserByName(userName);
+    }
+
+    @Override
+    public User getUserByPassword(String password) {
+        return userDao.getUserByPassword(password);
     }
 }
